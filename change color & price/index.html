@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <title>محصول با رنگ و ارسال</title>
+    <style>
+      .color-thumbs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .color-thumbs img {
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 8px;
+      }
+
+      .color-thumbs img.selected {
+        border-color: #000;
+      }
+    </style>
+  </head>
+  <body style="text-align: center; direction: rtl; font-family: tahoma">
+    <h3>انتخاب رنگ:</h3>
+
+    <div class="color-thumbs">
+      <img src="./1.png" data-color="white" class="selected" />
+      <img src="./2.png" data-color="black" />
+      <img src="./3.png" data-color="red" />
+    </div>
+
+    <div >
+      <img id="productImage" src="./1.png" style="width: 300px;" />
+    </div>
+
+    <h3>روش ارسال:</h3>
+    <select id="shippingSelect">
+      <option value="ground">زمینی</option>
+      <option value="air">هوایی</option>
+    </select>
+
+    <h3 style="margin-top: 50px">
+      قیمت:
+      <p id="priceText">5,100,000</p>
+      تومان
+    </h3>
+
+    <script>
+      const imageLinks = {
+        white: "./1.png",
+        black: "./2.png",
+        red: "./3.png",
+      };
+
+      const shippingPrices = {
+        ground: 100000,
+        air: 200000,
+      };
+      const basePrice = 5000000;
+
+      const productImage = document.getElementById("productImage");
+      const priceText = document.getElementById("priceText");
+      const shippingSelect = document.getElementById("shippingSelect");
+
+      shippingSelect.onchange = function () {
+        const finalPrice = basePrice + shippingPrices[this.value];
+        priceText.textContent = finalPrice.toLocaleString();
+      };
+
+      const thumbnails = document.querySelectorAll(".color-thumbs img");
+
+      thumbnails.forEach((thumb) => {
+        thumb.addEventListener("click", function () {
+          // تغییر عکس اصلی
+          const selectedColor = this.getAttribute("data-color");
+          productImage.src = imageLinks[selectedColor];
+
+          // هایلایت عکس انتخاب‌شده
+          thumbnails.forEach((t) => t.classList.remove("selected"));
+          this.classList.add("selected");
+        });
+      });
+    </script>
+  </body>
+</html>
