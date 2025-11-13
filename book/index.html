@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abolfazl mohseni - book Login form</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="book-container">
+            <div class="register-form">
+                <div class="form-content">
+                    <h1 id="register-title-bg">ایجاد حساب جدید</h1>
+                    <form onsubmit="event.preventDefault();">
+                        <div class="form-group"><label for="reg-name-bg">نام و نام خانوادگی</label> <input type="text"
+                                id="reg-name-bg" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                        <div class="form-group"><label for="reg-email-bg">ایمیل</label> <input type="email"
+                                id="reg-email-bg" placeholder="example@email.com" required>
+                        </div>
+                        <div class="form-group"><label for="reg-pass-bg">رمز عبور</label> <input type="password"
+                                id="reg-pass-bg" placeholder="رمز عبور خود را وارد کنید" required>
+                        </div><button type="submit" class="submit-btn">ثبت‌نام</button>
+                        <p class="switch-text">قبلاً ثبت‌نام کرده‌اید؟ <span class="switch-link" id="goToLogin">وارد
+                                شوید</span></p>
+                    </form>
+                </div>
+            </div>
+            <div class="login-form">
+                <div class="form-content">
+                    <h1 id="login-title-bg">ورود به حساب</h1>
+                    <form onsubmit="event.preventDefault();">
+                        <div class="form-group"><label for="login-email-bg">ایمیل</label> <input type="email"
+                                id="login-email-bg" placeholder="example@email.com" required>
+                        </div>
+                        <div class="form-group"><label for="login-pass-bg">رمز عبور</label> <input type="password"
+                                id="login-pass-bg" placeholder="رمز عبور خود را وارد کنید" required>
+                        </div><button type="submit" class="submit-btn">ورود</button>
+                        <p class="switch-text">حساب کاربری ندارید؟ <span class="switch-link" id="goToRegister">ثبت‌نام
+                                کنید</span></p>
+                    </form>
+                </div>
+            </div>
+            <div class="flip-paper" id="flipPaper">
+                <div class="paper-front">
+
+
+                </div>
+                <div class="paper-back">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultConfig = {
+            login_title: "ورود به حساب",
+            register_title: "ایجاد حساب جدید"
+        };
+
+        const flipPaper = document.getElementById('flipPaper');
+        const goToRegister = document.getElementById('goToRegister');
+        const goToLogin = document.getElementById('goToLogin');
+
+        async function onConfigChange(config) {
+            const loginTitle = config.login_title || defaultConfig.login_title;
+            const registerTitle = config.register_title || defaultConfig.register_title;
+
+            document.getElementById('login-title-bg').textContent = loginTitle;
+            document.getElementById('login-title-front').textContent = loginTitle;
+            document.getElementById('register-title-bg').textContent = registerTitle;
+            document.getElementById('register-title-back').textContent = registerTitle;
+        }
+
+        goToRegister.addEventListener('click', () => {
+            flipPaper.classList.add('flipped');
+        });
+
+        goToLogin.addEventListener('click', () => {
+            flipPaper.classList.remove('flipped');
+        });
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["login_title", config.login_title || defaultConfig.login_title],
+                    ["register_title", config.register_title || defaultConfig.register_title]
+                ])
+            });
+        }
+
+        onConfigChange(window.elementSdk?.config || defaultConfig);
+    </script>
+
+</html>
