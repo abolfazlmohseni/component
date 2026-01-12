@@ -69,3 +69,63 @@ body {
         bottom: 70%;
     }
 }
+.btn {
+    width: 248px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: rgb(221, 200, 12);
+    position: absolute;
+    animation-name: btn;
+    animation-duration: 4s;
+    animation-delay: 600ms;
+    animation-iteration-count: infinite;
+    bottom: 50%;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes btn {
+    100% {
+        right: 10%;
+        bottom: 65%;
+    }
+     90% {
+        right: 15%;
+        bottom: 50%;
+    }
+     80% {
+        right: 15%;
+        bottom: 65%;
+    }
+     70% {
+        right: 20%;
+        bottom: 50%;
+    }
+     60% {
+        right: 20%;
+        bottom: 65%;
+    }
+
+     50% {
+        right: 25%;
+        bottom: 50%;
+    }
+     40% {
+        right: 25%;
+        bottom: 65%;
+    }
+     30% {
+        right: 30%;
+        bottom: 50%;
+    }
+     20% {
+        right: 30%;
+        bottom: 65%;
+    }
+   10% {
+        right: 35%;
+        bottom: 50%;
+    }
+    0% {
+        right: 35%;
+        bottom: 70%;
+    }
+}
